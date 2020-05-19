@@ -3,6 +3,9 @@ export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 nvm use 10.16.0
 
+# asdf
+. $HOME/.asdf/asdf.sh
+
 # Ensure user-installed binaries take precedence
 export PATH=/usr/local/bin:$PATH
 
