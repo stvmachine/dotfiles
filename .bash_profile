@@ -1,16 +1,13 @@
 # nvm config
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
-nvm use 16.6.1
+nvm use 14.17.4
 
 # asdf
 . $HOME/.asdf/asdf.sh
 
 # Ensure user-installed binaries take precedence
 export PATH=/usr/local/bin:$PATH
-
-# Ruby 
-eval "$(rbenv init -)"
 
 # Android sdk tools
 # export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -21,7 +18,7 @@ eval "$(rbenv init -)"
 
 
 # mysql
-# export PATH=:/usr/local/mysql/bin:$PATH
+export PATH=:/usr/local/mysql/bin:$PATH
 
 # Fastlane
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -47,4 +44,7 @@ eval "$(rbenv init -)"
 # alias rnmenu="adb shell input keyevent 82"
 
 
-
+# Open ssl
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
