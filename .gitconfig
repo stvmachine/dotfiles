@@ -1,6 +1,6 @@
  [user]
-	name = Esteban Campos
 	email = campos.esteban@gmail.com
+	name = stvmachine
 [gc]
 	autoDetach = false
 [filter "lfs"]
@@ -12,3 +12,20 @@
 	rebase = true
 [core]
 	excludesfile = /Users/esteban/.gitignore_global
+	pager = delta
+[include]
+	path = /Users/esteban/.gitconfig.local
+[dotfiles]
+	managed = true
+[credential]
+	helper = osxkeychain
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	syntax-theme = Dracula
+	line-numbers = true
+	decorations = true
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = false

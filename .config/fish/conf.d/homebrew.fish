@@ -1,0 +1,1 @@
+/Users/esteban/.dotfiles/homebrew/conf.d/homebrew.fish

@@ -1,0 +1,1 @@
+/Users/esteban/.dotfiles/yubikey/conf.d/yubikey.fish
