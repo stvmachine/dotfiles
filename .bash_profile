@@ -1,7 +1,7 @@
 # nvm config
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
-nvm use 14.17.4
+# nvm use 16.13.0
 
 # asdf
 . $HOME/.asdf/asdf.sh
@@ -10,24 +10,22 @@ nvm use 14.17.4
 export PATH=/usr/local/bin:$PATH
 
 # Android sdk tools
-# export ANDROID_HOME=$HOME/Library/Android/sdk
-
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/tools/bin
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # mysql
-export PATH=:/usr/local/mysql/bin:$PATH
+# export PATH=:/usr/local/mysql/bin:$PATH
 
 # Fastlane
 # if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # export PATH="$HOME/.fastlane/bin:$PATH"
 
 # Java
-# export JAVA_HOME=$(/usr/libexec/java_home)
-# export PATH=${JAVA_HOME}/bin:$PATH
-
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=${JAVA_HOME}/bin:$PATH
 
 # Mongodb
 # export MONGO_PATH=/usr/local/mongodb
@@ -35,10 +33,13 @@ export PATH=:/usr/local/mysql/bin:$PATH
 
 # --------- Python -----
 # Pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
-# if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
+
+# Poetry
+export PATH="/Users/esteban/Library/Python/3.9/bin:$PATH"
 
 # React Native: For not shake on RN to access debug options
 # alias rnmenu="adb shell input keyevent 82"
@@ -48,3 +49,6 @@ export PATH=:/usr/local/mysql/bin:$PATH
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+
+
+export GPG_TTY=$(tty)

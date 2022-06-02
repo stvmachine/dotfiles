@@ -1,0 +1,1 @@
+/Users/esteban/.dotfiles/gnupg/conf.d/gpg.fish

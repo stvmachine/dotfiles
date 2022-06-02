@@ -1,0 +1,1 @@
+/Users/esteban/.dotfiles/starship/conf.d/starship.fish
