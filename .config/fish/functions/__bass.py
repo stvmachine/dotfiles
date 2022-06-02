@@ -46,7 +46,7 @@ def escape_identifier(word):
     return escape(word.replace('?', '\\?'))
 
 def comment(string):
-    return '\n'.join(['# ' + line for line in string.split('\n')])
+    return '\n'.join([f'# {line}' for line in string.split('\n')])
 
 def gen_script():
     # Use the following instead of /usr/bin/env to read environment so we can
@@ -59,10 +59,7 @@ def gen_script():
     pipe_r, pipe_w = os.pipe()
     if sys.version_info >= (3, 4):
       os.set_inheritable(pipe_w, True)
-    command = 'eval $1 && ({}; alias) >&{}'.format(
-        env_reader,
-        pipe_w
-    )
+    command = f'eval $1 && ({env_reader}; alias) >&{pipe_w}'
     args = [BASH, '-c', command, 'bass', ' '.join(sys.argv[1:])]
     p = subprocess.Popen(args, universal_newlines=True, close_fds=False)
     os.close(pipe_w)
@@ -87,12 +84,12 @@ def gen_script():
             continue
         v1 = old_env.get(k)
         if not v1:
-            script_lines.append(comment('adding %s=%s' % (k, v)))
+            script_lines.append(comment(f'adding {k}={v}'))
         elif v1 != v:
-            script_lines.append(comment('updating %s=%s -> %s' % (k, v1, v)))
+            script_lines.append(comment(f'updating {k}={v1} -> {v}'))
             # process special variables
             if k == 'PWD':
-                script_lines.append('cd %s' % escape(v))
+                script_lines.append(f'cd {escape(v)}')
                 continue
         else:
             continue
@@ -101,19 +98,17 @@ def gen_script():
                               for directory in v.split(':')])
         else:
             value = escape(v)
-        script_lines.append('set -g -x %s %s' % (k, value))
+        script_lines.append(f'set -g -x {k} {value}')
 
     for var in set(old_env.keys()) - set(new_env.keys()):
-        script_lines.append(comment('removing %s' % var))
-        script_lines.append('set -e %s' % var)
-
+        script_lines.extend((comment(f'removing {var}'), f'set -e {var}'))
     script = '\n'.join(script_lines)
 
     alias_lines = []
     for line in alias_str.splitlines():
         _, rest = line.split(None, 1)
         k, v = rest.split("=", 1)
-        alias_lines.append("alias " + escape_identifier(k) + "=" + v)
+        alias_lines.append(f"alias {escape_identifier(k)}={v}")
     alias = '\n'.join(alias_lines)
 
     return script + '\n' + alias
